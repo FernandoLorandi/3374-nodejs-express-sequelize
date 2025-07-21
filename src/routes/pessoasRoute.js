@@ -1,7 +1,10 @@
 const {Router} = require('express');
 const PessoaController = require('../controllers/PessoaController');
+const MatriculaController = require('../controllers/MatriculaController');
 
 const pessoaController = new PessoaController(); //Instancia o controller de pessoas
+const matriculaController = new MatriculaController(); //Instancia o controller de matrículas
+
 
 const router = Router();
 
@@ -10,5 +13,8 @@ router.get('/pessoas/:id', (req, res) => pessoaController.pegaPorId(req, res)); 
 router.post('/pessoas', (req, res) => pessoaController.criaRegistro(req, res)); //Rota para criar um novo registro de pessoa
 router.put('/pessoas/:id', (req, res) => pessoaController.atualizaRegistro(req, res)); //Rota para atualizar um registro de pessoa
 router.delete('/pessoas/:id', (req, res) => pessoaController.apagaRegistro(req, res)); //Rota para apagar um registro de pessoa
+
+router.get('/pessoas/:estudanteId/matriculas', (req, res) => pessoaController.pegaMatriculas(req, res));
+router.post('/pessoas/:estudanteId/matriculas', (req, res) => matriculaController.criaRegistro(req, res));
 
 module.exports = router; //Exporta o roteador para ser usado no app principal (utilizado como um middleware)
